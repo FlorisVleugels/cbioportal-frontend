@@ -169,6 +169,7 @@ export enum ChartMetaDataTypeEnum {
     GENOMIC = 'Genomic',
     GENE_SPECIFIC = 'Gene_Specific',
     GENERIC_ASSAY = 'Generic_Assay',
+    VARIANT_ANNOTATIONS = 'Variant Annotations',
 }
 
 export type ChartMeta = {

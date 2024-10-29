@@ -96,6 +96,7 @@ export enum TabNamesEnum {
     CLINICAL = 'Clinical',
     GENOMIC = 'Genomic',
     GENE_SPECIFIC = 'Gene Specific',
+    VARIANT_ANNOTATIONS = 'Variant Annotations',
 }
 
 @observer
@@ -1043,6 +1044,25 @@ class AddChartTabs extends React.Component<IAddChartTabsProps, {}> {
                         </div>
                     </MSKTab>
                     <MSKTab
+                        key={4}
+                        id={ChartMetaDataTypeEnum.VARIANT_ANNOTATIONS}
+                        linkText={TabNamesEnum.VARIANT_ANNOTATIONS}
+                        hide={
+                            this.props.disableGenomicTab ||
+                            this.genomicChartOptions.length === 0
+                        }
+                        className="addVariantAnnotationChartTab"
+                    >
+                        <AddChartByType
+                            width={this.getTabsWidth}
+                            options={this.genomicChartOptions}
+                            freqPromise={this.dataCount}
+                            onAddAll={this.onAddAll}
+                            onClearAll={this.onClearAll}
+                            onToggleOption={this.onToggleOption}
+                        />
+                    </MSKTab>
+                    <MSKTab
                         id={'X_Vs_Y'}
                         linkText={
                             <span>
@@ -1055,7 +1075,7 @@ class AddChartTabs extends React.Component<IAddChartTabsProps, {}> {
                                 </strong>
                             </span>
                         }
-                        key={4}
+                        key={5}
                     >
                         <div
                             style={{
