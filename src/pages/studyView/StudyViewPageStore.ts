@@ -4731,6 +4731,12 @@ export class StudyViewPageStore
     public getClinicalDataCount(
         chartMeta: ChartMeta
     ): MobxPromise<ClinicalDataCountSummary[]> {
+        console.log(
+            this.internalClient.getOQLQueryUsingPOST({
+                query: 'test',
+            })
+        );
+
         let uniqueKey: string = getUniqueKey(chartMeta.clinicalAttribute!);
         if (!this.clinicalDataCountPromises.hasOwnProperty(uniqueKey)) {
             const isDefaultAttr =
