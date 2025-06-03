@@ -1,7 +1,6 @@
 import React from 'react';
 
 import mainStyles from '../../../../packages/oncokb-frontend-commons/src/components/main.module.scss';
-import collapsibleStyles from '../../../../packages/oncokb-frontend-commons/src/components/collapsible.module.scss';
 import { Collapse } from 'react-collapse';
 import classnames from 'classnames';
 
@@ -19,10 +18,15 @@ export const ChatBotSelectorDropdown: React.FunctionComponent<ChatBotSelectorDro
         <div>
             <div
                 data-test="chatboxselector-dropdown-header"
-                className={collapsibleStyles['collapsible-header']}
+                style={{
+                    padding: '25px 0px 0px 0px',
+                    borderStyle: 'none none solid none',
+                    borderColor: '#ddd',
+                }}
+                // className={collapsibleStyles['collapsible-header']}
                 onClick={() => updateLevelCollapse(!componentCollapsed)}
             >
-                {props.dropdownTitle}
+                <span style={{ fontSize: 14 }}>{props.dropdownTitle}</span>
                 <span style={{ float: 'right' }}>
                     {componentCollapsed ? (
                         <i
@@ -42,7 +46,9 @@ export const ChatBotSelectorDropdown: React.FunctionComponent<ChatBotSelectorDro
                 </span>
             </div>
             <Collapse isOpened={!componentCollapsed}>
-                {props.collapsibleArea}
+                <div style={{ padding: '25px 0px 0px 0px' }}>
+                    {props.collapsibleArea}
+                </div>
             </Collapse>
         </div>
     );
