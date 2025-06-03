@@ -44,7 +44,7 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
     render() {
         return (
             <FlexCol>
-                <FlexRow overflow={true} padded>
+                <FlexRow>
                     <OQLTextArea
                         focus={this.store.geneQueryErrorDisplayStatus}
                         inputGeneQuery={this.store.geneQuery}
@@ -73,15 +73,10 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
                         </button>
                     </FlexCol>
                 </FlexRow>
-
                 <SectionHeader
                     className="sectionLabel"
                     secondaryComponent={
-                        <a
-                            target="_blank"
-                            className={styles.learnOql}
-                            href={getOncoQueryDocUrl()}
-                        >
+                        <a target="_blank" href={getOncoQueryDocUrl()}>
                             <strong>Hint:</strong> See some example queries here{' '}
                             <i className={'fa fa-external-link'} />
                         </a>
