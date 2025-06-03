@@ -22,6 +22,7 @@ export const ChatBotSelectorDropdown: React.FunctionComponent<ChatBotSelectorDro
                     padding: '25px 0px 0px 0px',
                     borderStyle: 'none none solid none',
                     borderColor: '#ddd',
+                    borderWidth: '1px',
                 }}
                 // className={collapsibleStyles['collapsible-header']}
                 onClick={() => updateLevelCollapse(!componentCollapsed)}
