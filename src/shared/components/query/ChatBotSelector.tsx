@@ -44,7 +44,7 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
     render() {
         return (
             <FlexCol>
-                <FlexRow overflow>
+                <FlexRow overflow={true} padded>
                     <OQLTextArea
                         focus={this.store.geneQueryErrorDisplayStatus}
                         inputGeneQuery={this.store.geneQuery}
@@ -57,20 +57,23 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
                         // error={this.store.submitError}
                         messages={this.store.oqlMessages}
                     ></OQLTextArea>
-                    <button
-                        style={{
-                            paddingLeft: 10,
-                            paddingRight: 10,
-                            marginLeft: 10,
-                        }}
-                        disabled={!this.store.submitEnabled}
-                        className="btn btn-primary btn-lg"
-                        onClick={() => this.handleSubmit()}
-                        data-test="queryButton"
-                    >
-                        Generate Query
-                    </button>
+                    <FlexCol>
+                        <button
+                            style={{
+                                paddingLeft: 10,
+                                paddingRight: 10,
+                                marginLeft: 10,
+                            }}
+                            disabled={!this.store.submitEnabled}
+                            className="btn btn-primary btn-lg"
+                            //onClick={() => this.handleSubmit()}
+                            data-test="generateButton"
+                        >
+                            Generate Query
+                        </button>
+                    </FlexCol>
                 </FlexRow>
+
                 <SectionHeader
                     className="sectionLabel"
                     secondaryComponent={
@@ -79,8 +82,7 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
                             className={styles.learnOql}
                             href={getOncoQueryDocUrl()}
                         >
-                            <strong>Hint:</strong> Learn Onco Query Language
-                            (OQL) to write more powerful queries{' '}
+                            <strong>Hint:</strong> See some example queries here{' '}
                             <i className={'fa fa-external-link'} />
                         </a>
                     }
