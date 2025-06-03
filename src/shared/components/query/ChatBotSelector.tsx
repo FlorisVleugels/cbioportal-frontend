@@ -43,12 +43,8 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
 
     render() {
         return (
-            <FlexRow overflow padded className={styles.GeneSetSelector}>
-                <SectionHeader className="sectionLabel">
-                    Ask le Chatgippity:
-                </SectionHeader>
-
-                <FlexCol overflow>
+            <FlexCol>
+                <FlexRow overflow>
                     <OQLTextArea
                         focus={this.store.geneQueryErrorDisplayStatus}
                         inputGeneQuery={this.store.geneQuery}
@@ -61,8 +57,35 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
                         // error={this.store.submitError}
                         messages={this.store.oqlMessages}
                     ></OQLTextArea>
-                </FlexCol>
-            </FlexRow>
+                    <button
+                        style={{
+                            paddingLeft: 10,
+                            paddingRight: 10,
+                            marginLeft: 10,
+                        }}
+                        disabled={!this.store.submitEnabled}
+                        className="btn btn-primary btn-lg"
+                        onClick={() => this.handleSubmit()}
+                        data-test="queryButton"
+                    >
+                        Generate Query
+                    </button>
+                </FlexRow>
+                <SectionHeader
+                    className="sectionLabel"
+                    secondaryComponent={
+                        <a
+                            target="_blank"
+                            className={styles.learnOql}
+                            href={getOncoQueryDocUrl()}
+                        >
+                            <strong>Hint:</strong> Learn Onco Query Language
+                            (OQL) to write more powerful queries{' '}
+                            <i className={'fa fa-external-link'} />
+                        </a>
+                    }
+                ></SectionHeader>
+            </FlexCol>
         );
     }
 }

@@ -7,7 +7,6 @@ import { observer } from 'mobx-react';
 import DataTypePrioritySelector from './DataTypePrioritySelector';
 import GenesetsSelector from './GenesetsSelector';
 import GeneSetSelector from './GeneSetSelector';
-import ChatBotSelector from './ChatBotSelector';
 import LabeledCheckbox from '../labeledCheckbox/LabeledCheckbox';
 import { QueryStore } from './QueryStore';
 import { providesStoreContext } from '../../lib/ContextUtils';
@@ -307,8 +306,6 @@ export default class QueryContainer extends React.Component<
                                 {!!this.store.isGenesetProfileSelected && (
                                     <GenesetsSelector />
                                 )}
-
-                                <ChatBotSelector />
 
                                 {!!this.store.forDownloadTab && (
                                     <span
