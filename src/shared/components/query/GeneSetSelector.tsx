@@ -20,6 +20,8 @@ import { Gene } from 'cbioportal-ts-api-client';
 import GenesetsValidator from './GenesetsValidator';
 import FontAwesome from 'react-fontawesome';
 import GeneSymbolValidationError from './GeneSymbolValidationError';
+import ChatBotSelector from 'shared/components/query/ChatBotSelector';
+import { ChatBotSelectorDropdown } from 'shared/components/query/ChatBotSelectorDropdown';
 
 @observer
 export default class GeneSetSelector extends QueryStoreComponent<{}, {}> {
@@ -148,6 +150,11 @@ export default class GeneSetSelector extends QueryStoreComponent<{}, {}> {
                     </OQLTextArea>
 
                     <GenesetsValidator />
+
+                    <ChatBotSelectorDropdown
+                        collapsibleArea={<ChatBotSelector />}
+                        dropdownTitle={'Ask CHATbOtQL'}
+                    ></ChatBotSelectorDropdown>
 
                     <Modal
                         className={classNames(

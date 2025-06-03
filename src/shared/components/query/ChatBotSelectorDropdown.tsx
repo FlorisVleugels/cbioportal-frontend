@@ -1,7 +1,7 @@
 import React from 'react';
 
-import mainStyles from './main.module.scss';
-import collapsibleStyles from './collapsible.module.scss';
+import mainStyles from '../../../../packages/oncokb-frontend-commons/src/components/main.module.scss';
+import collapsibleStyles from '../../../../packages/oncokb-frontend-commons/src/components/collapsible.module.scss';
 import { Collapse } from 'react-collapse';
 import classnames from 'classnames';
 
