@@ -35,10 +35,15 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
         genes: { found: Gene[]; suggestions: GeneReplacement[] },
         queryStr: string
     ): void {
-        if (queryStr !== this.store.geneQuery) {
-            this.store.geneQuery = queryStr;
-            this.store.oql.error = oql.error;
+        if (queryStr !== this.store.aiQuery) {
+            this.store.aiQuery = queryStr;
         }
+    }
+
+    handleSubmit() {
+        this.store.geneQuery = this.store.aiQuery;
+
+        await async;
     }
 
     render() {
@@ -47,7 +52,7 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
                 <FlexRow>
                     <OQLTextArea
                         focus={this.store.geneQueryErrorDisplayStatus}
-                        inputGeneQuery={this.store.geneQuery}
+                        inputGeneQuery={this.store.aiQuery}
                         validateInputGeneQuery={false}
                         location={GeneBoxType.DEFAULT}
                         textBoxPrompt={
@@ -64,9 +69,9 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
                                 paddingRight: 10,
                                 marginLeft: 10,
                             }}
-                            disabled={!this.store.submitEnabled}
+                            disabled={this.store.generateQueryEnabled}
                             className="btn btn-primary btn-lg"
-                            //onClick={() => this.handleSubmit()}
+                            onClick={() => this.handleSubmit()}
                             data-test="generateButton"
                         >
                             Generate Query
