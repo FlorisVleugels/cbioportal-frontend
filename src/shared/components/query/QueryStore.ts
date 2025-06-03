@@ -580,6 +580,15 @@ export class QueryStore {
         this.rawGenesetQuery = value;
     }
 
+    @observable _aiQuery = '';
+    get aiQuery() {
+        return this._aiQuery;
+    }
+
+    set aiQuery(value: string) {
+        this._aiQuery = value;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////
     // VISUAL OPTIONS
     ////////////////////////////////////////////////////////////////////////////////
@@ -1975,6 +1984,10 @@ export class QueryStore {
             !!this.oql.error ||
             !!this.genesetIdsQuery.error
         ); // to make "Please click 'Submit' to see location of error." possible
+    }
+
+    @computed get generateQueryEnabled() {
+        return this.aiQuery === '';
     }
 
     @computed get summaryEnabled() {
