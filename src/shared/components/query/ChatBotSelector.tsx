@@ -1,27 +1,17 @@
 import * as React from 'react';
-import styles from './styles/styles.module.scss';
-import { Modal } from 'react-bootstrap';
-import ReactSelect from 'react-select1';
 import { observer } from 'mobx-react';
-import { computed, action, makeObservable } from 'mobx';
+import { action, makeObservable } from 'mobx';
 import { FlexRow, FlexCol } from '../flexbox/FlexBox';
-import gene_lists from './gene_lists';
-import classNames from 'classnames';
 import { getOncoQueryDocUrl } from '../../api/urls';
 import { QueryStoreComponent, Focus, GeneReplacement } from './QueryStore';
-import MutSigGeneSelector from './MutSigGeneSelector';
-import GisticGeneSelector from './GisticGeneSelector';
 import SectionHeader from '../sectionHeader/SectionHeader';
-import { getServerConfig } from 'config/config';
-import { ServerConfigHelpers } from '../../../config/config';
 import OQLTextArea, { GeneBoxType } from '../GeneSelectionBox/OQLTextArea';
 import { SingleGeneQuery } from 'shared/lib/oql/oql-parser';
-import { Gene } from 'cbioportal-ts-api-client';
-import FontAwesome from 'react-fontawesome';
+import { Gene, CBioPortalAPIInternal } from 'cbioportal-ts-api-client';
 
 @observer
 export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
-    constructor(props: any) {
+    constructor(props: any, public internalClient: CBioPortalAPIInternal) {
         super(props);
         makeObservable(this);
     }
@@ -40,10 +30,14 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
         }
     }
 
-    handleSubmit() {
-        this.store.geneQuery = this.store.aiQuery;
+    async handleSubmit() {
+        this.store.geneQuery = await this.getAIResponse();
+    }
 
-        await async;
+    getAIResponse() {
+        return this.internalClient.getOQLQueryUsingPOST({
+            query: this.store.aiQuery,
+        });
     }
 
     render() {

@@ -8238,4 +8238,39 @@ export default class CBioPortalAPIInternal {
                 return response.body;
             });
         };
+    /**
+     * OQL hackathon stuff
+     */
+    getOQLQueryUsingPOSTWithHttpInfo(parameters: {
+        'query' ? : string,
+    }): Promise < request.Response > {
+        const domain = "http://localhost:9000";
+        const errorHandlers = this.errorHandlers;
+        const request = this.request;
+        let path = '/';
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise(function(resolve, reject) {
+            headers['Accept'] = 'application/json';
+            headers['Content-Type'] = 'application/json';
+
+            if (parameters['query'] !== undefined) {
+                body = parameters['query'];
+            }
+
+            request('POST', domain + path, body, headers, queryParameters, form, reject, resolve, errorHandlers);
+
+        });
+    };
+
+    getOQLQueryUsingPOST(parameters: {
+            'query' ? : string,
+        }): Promise < string 
+        > {
+            return this.getOQLQueryUsingPOSTWithHttpInfo(parameters).then(function(response: request.Response) {
+                return response.body;
+            });
+        };
 }
