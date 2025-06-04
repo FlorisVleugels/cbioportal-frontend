@@ -354,6 +354,12 @@ export class QueryStore {
         }
     }
 
+    public getAIResponse() {
+        return internalClient.getOQLQueryUsingPOST({
+            query: this.aiQuery,
+        });
+    }
+
     //this is to cache a selected ids in the query
     // used in when visualizing a shared another user virtual study
     private _defaultSelectedIds: ObservableMap<
