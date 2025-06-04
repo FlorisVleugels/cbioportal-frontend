@@ -153,7 +153,7 @@ export default class GeneSetSelector extends QueryStoreComponent<{}, {}> {
 
                     <ChatBotSelectorDropdown
                         collapsibleArea={<ChatBotSelector />}
-                        dropdownTitle={'Ask AI'}
+                        dropdownTitle={'Ask AI OQL Helper'}
                     ></ChatBotSelectorDropdown>
 
                     <Modal
