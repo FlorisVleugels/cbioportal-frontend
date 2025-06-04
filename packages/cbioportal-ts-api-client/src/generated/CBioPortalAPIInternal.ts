@@ -133,6 +133,9 @@ export type ClinicalAttributeCountFilter = {
         'sampleListId': string
 
 };
+export type OQLHelperMessage = {
+        'message': string
+};
 export type ClinicalData = {
     'clinicalAttribute': ClinicalAttribute
 
@@ -8242,7 +8245,7 @@ export default class CBioPortalAPIInternal {
      * OQL hackathon stuff
      */
     getOQLQueryUsingPOSTWithHttpInfo(parameters: {
-        'query' ? : string,
+        'oqlHelperMessage' ? : OQLHelperMessage,
     }): Promise < request.Response > {
         const domain = "http://localhost/oqlhelper";
         const errorHandlers = this.errorHandlers;
@@ -8256,8 +8259,8 @@ export default class CBioPortalAPIInternal {
             headers['Accept'] = 'application/json';
             headers['Content-Type'] = 'application/json';
 
-            if (parameters['query'] !== undefined) {
-                body = parameters['query'];
+            if (parameters['oqlHelperMessage'] !== undefined) {
+                body = parameters['oqlHelperMessage'];
             }
 
             request('POST', domain + path, body, headers, queryParameters, form, reject, resolve, errorHandlers);
@@ -8266,9 +8269,9 @@ export default class CBioPortalAPIInternal {
     };
 
     getOQLQueryUsingPOST(parameters: {
-            'query' ? : string,
-        }): Promise < string 
-        > {
+        'oqlHelperMessage' ? : OQLHelperMessage,
+        }): Promise<{ query: string }>
+        {
             return this.getOQLQueryUsingPOSTWithHttpInfo(parameters).then(function(response: request.Response) {
                 return response.body;
             });

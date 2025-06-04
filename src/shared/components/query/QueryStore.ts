@@ -73,6 +73,7 @@ import { QueryParser } from 'shared/lib/query/QueryParser';
 import { AppStore } from 'AppStore';
 import { ResultsViewTab } from 'pages/resultsView/ResultsViewPageHelpers';
 import { CaseSetId } from 'shared/components/query/CaseSetSelectorUtils';
+import { OQLHelperMessage } from 'cbioportal-ts-api-client/dist/generated/CBioPortalAPIInternal';
 
 // interface for communicating
 export type CancerStudyQueryUrlParams = {
@@ -355,8 +356,12 @@ export class QueryStore {
     }
 
     public getAIResponse() {
+        let message = this.aiQuery;
+        let oqlHelperMessage = {
+            message,
+        } as OQLHelperMessage;
         return internalClient.getOQLQueryUsingPOST({
-            query: this.aiQuery,
+            oqlHelperMessage,
         });
     }
 
