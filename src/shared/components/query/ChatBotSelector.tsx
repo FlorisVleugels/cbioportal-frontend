@@ -31,14 +31,14 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
     }
 
     async handleSubmit() {
-        this.store.geneQuery = await this.getAIResponse();
+        this.store.geneQuery = await this.store.getAIResponse();
     }
 
-    getAIResponse() {
-        return this.internalClient.getOQLQueryUsingPOST({
-            query: this.store.aiQuery,
-        });
-    }
+    //getAIResponse() {
+    //return this.internalClient.getOQLQueryUsingPOST({
+    //query: this.store.aiQuery,
+    //});
+    //}
 
     render() {
         return (
