@@ -8247,7 +8247,7 @@ export default class CBioPortalAPIInternal {
     getOQLQueryUsingPOSTWithHttpInfo(parameters: {
         'oqlHelperMessage' ? : OQLHelperMessage,
     }): Promise < request.Response > {
-        const domain = "http://localhost/oqlhelper";
+        const domain = "https://localhost-alt/oqlhelper";
         const errorHandlers = this.errorHandlers;
         const request = this.request;
         let path = '/';
