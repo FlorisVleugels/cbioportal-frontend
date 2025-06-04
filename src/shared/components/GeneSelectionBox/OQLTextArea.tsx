@@ -312,7 +312,7 @@ export default class OQLTextArea extends React.Component<
 
                     {this.props.submitButton}
                 </div>
-                {this.queryToBeValidated && (
+                {this.props.validateInputGeneQuery && (
                     <div className={'oqlValidationContainer'}>
                         <GeneSymbolValidator
                             focus={this.props.focus}
@@ -331,6 +331,12 @@ export default class OQLTextArea extends React.Component<
                         </GeneSymbolValidator>
                     </div>
                 )}
+                {!this.props.validateInputGeneQuery &&
+                    this.afterGeneSymbolValidation(
+                        true,
+                        { found: [], suggestions: [] },
+                        getOQL(this.geneQueryStr)
+                    )}
                 <div>
                     {this.showErrorsAndMessages && this.props.error && (
                         <span
