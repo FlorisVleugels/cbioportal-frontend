@@ -8246,11 +8246,12 @@ export default class CBioPortalAPIInternal {
      */
     getOQLQueryUsingPOSTWithHttpInfo(parameters: {
         'oqlHelperMessage' ? : OQLHelperMessage,
+            $domain ? : string
     }): Promise < request.Response > {
-        const domain = "http://localhost/oqlhelper";
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
         const errorHandlers = this.errorHandlers;
         const request = this.request;
-        let path = '/';
+        let path = '/oqlhelper';
         let body: any;
         let queryParameters: any = {};
         let headers: any = {};
@@ -8270,6 +8271,7 @@ export default class CBioPortalAPIInternal {
 
     getOQLQueryUsingPOST(parameters: {
         'oqlHelperMessage' ? : OQLHelperMessage,
+                $domain ? : string
         }): Promise<{ query: string }>
         {
             return this.getOQLQueryUsingPOSTWithHttpInfo(parameters).then(function(response: request.Response) {
