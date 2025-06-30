@@ -600,6 +600,15 @@ export class QueryStore {
         this._aiQuery = value;
     }
 
+    @observable _aiMessage = '';
+    get aiMessage() {
+        return this._aiMessage;
+    }
+
+    set aiMessage(value: string) {
+        this._aiMessage = value;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////
     // VISUAL OPTIONS
     ////////////////////////////////////////////////////////////////////////////////

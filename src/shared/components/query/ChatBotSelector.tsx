@@ -31,20 +31,16 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
     }
 
     async handleSubmit() {
-        // let test = JSON.parse('{"query":"OQL: TRUE, EGFR: AMP"}');
-        // let status = test.query.split(",", 2)[0];
-        // console.log(status)
-        // let statusObject = JSON.parse(status)
-        // console.log(statusObject)
-
-        // if (statusObject.OQL === "TRUE") {
-        // console.log("works")
-        //} else {
-        //console.log(statusObject.OQL)
-        //}
-
+        this.store.aiMessage = '';
+        this.store.geneQuery = '';
         let result = await this.store.getAIResponse();
-        this.store.geneQuery = result.query;
+        const parts = result.query.split('OQL: ', 2);
+
+        if (parts.length < 2 || parts[1].trim().toUpperCase() === 'FALSE') {
+            this.store.aiMessage = 'Please enter a valid OQL question.';
+        } else {
+            this.store.geneQuery = parts[0].trim();
+        }
     }
 
     render() {
@@ -58,7 +54,7 @@ export default class ChatBotSelector extends QueryStoreComponent<{}, {}> {
                         location={GeneBoxType.DEFAULT}
                         textBoxPrompt={'Enter your Query in Natural Language'}
                         callback={this.handleOQLUpdate}
-                        // error={this.store.submitError}
+                        error={this.store.aiMessage}
                         // messages={this.store.oqlMessages}
                     ></OQLTextArea>
                     <FlexCol>
