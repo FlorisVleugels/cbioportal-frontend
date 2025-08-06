@@ -1,10 +1,12 @@
 declare const styles: {
   readonly "GeneSymbolValidator": string;
+  readonly "chatWindow": string;
   readonly "default": string;
   readonly "empty": string;
   readonly "errorMessage": string;
   readonly "genesSelection": string;
   readonly "icon": string;
+  readonly "inputarea": string;
   readonly "invalidBubble": string;
   readonly "multiChoiceLabel": string;
   readonly "noChoiceLabel": string;
@@ -16,6 +18,8 @@ declare const styles: {
   readonly "studyView": string;
   readonly "studyViewFocus": string;
   readonly "suggestionBubble": string;
+  readonly "textarea": string;
+  readonly "titlearea": string;
   readonly "topRow": string;
   readonly "validBubble": string;
   readonly "validationBubbleBase": string;

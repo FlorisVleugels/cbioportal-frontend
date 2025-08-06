@@ -97,6 +97,7 @@ export default class OQLTextArea extends React.Component<
     @observable private queryToBeValidated = '';
     @observable private isFocused = false;
     @observable private skipGenesValidation = false;
+    @observable private showComment = true;
     private queryStore: QueryStore | undefined;
 
     private readonly textAreaRef: React.RefObject<HTMLTextAreaElement>;
@@ -177,6 +178,11 @@ export default class OQLTextArea extends React.Component<
 
         // The uncontrolled component value should be updated at the moment the gene query is updated
         this.updateTextAreaRefValue();
+    }
+
+    @action.bound
+    private changeIcon() {
+        this.showComment = !this.showComment;
     }
 
     private getTextAreaValue() {
@@ -291,6 +297,18 @@ export default class OQLTextArea extends React.Component<
         );
     }
 
+    chatWindow() {
+        return (
+            <div className={styles.chatWindow}>
+                <section className={styles.titlearea}>
+                    cBioPortal OQL Support
+                </section>
+                <div></div>
+                <div className={styles.inputarea}></div>
+            </div>
+        );
+    }
+
     render() {
         return (
             <div className={styles.genesSelection}>
@@ -309,6 +327,26 @@ export default class OQLTextArea extends React.Component<
                         data-test="geneSet"
                         style={{ height: this.props.textAreaHeight }}
                     />
+
+                    <button
+                        style={{ width: '48px', height: '48px' }}
+                        className="btn btn-primary btn-lg"
+                        data-test="aiButton"
+                        onClick={this.changeIcon}
+                    >
+                        {this.showComment ? (
+                            <i
+                                className="fa fa-comment"
+                                style={{ fontSize: '24px', marginLeft: '-4px' }}
+                            ></i>
+                        ) : (
+                            <i
+                                className="fa fa-angle-down"
+                                style={{ fontSize: '24px' }}
+                            ></i>
+                        )}
+                    </button>
+                    {this.chatWindow()}
 
                     {this.props.submitButton}
                 </div>
