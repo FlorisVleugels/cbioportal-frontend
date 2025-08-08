@@ -264,6 +264,8 @@ export default class OQLTextArea extends React.Component<
             : 'Click gene symbols below or enter here';
     }
 
+    handleSubmit() {}
+
     @bind onChange(event: any) {
         this.currentTextAreaValue = event.currentTarget.value;
         this.geneQueryStr = this.currentTextAreaValue;
@@ -297,14 +299,66 @@ export default class OQLTextArea extends React.Component<
         );
     }
 
+    renderMessages() {
+        enum Speaker {
+            AI,
+            User,
+        }
+        let messages: Map<Speaker, String> = new Map();
+
+        messages.set(
+            Speaker.AI,
+            "Hi there! \n My name is Tobi, I'm cBioPortal's Support Robot 🤖"
+        );
+        messages.set(Speaker.AI, 'What can I do for you today?');
+        messages.set(Speaker.User, 'I have a question foo bar foo bar');
+
+        messages.forEach((value: String, key: Speaker) => {});
+
+        return (
+            <div>
+                <div className={styles.message}>hello</div>
+                <div className={styles.question}>question</div>
+            </div>
+        );
+    }
+
     chatWindow() {
         return (
             <div className={styles.chatWindow}>
                 <section className={styles.titlearea}>
-                    cBioPortal OQL Support
+                    cBioPortal Support
                 </section>
-                <div></div>
-                <div className={styles.inputarea}></div>
+
+                <div className={styles.textarea}>
+                    <div className={styles.textheader}>
+                        Please ask your cBioPortal related questions here for
+                        example OQL, which the ai will format for you
+                    </div>
+                    {this.renderMessages()}
+                </div>
+
+                <div className={styles.inputarea}>
+                    <form className={styles.form}>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            value="Type a message"
+                        />
+                        <button
+                            className="fa fa-paper-plane"
+                            aria-hidden="true"
+                            style={{
+                                fontSize: '20px',
+                                color: '#3498db',
+                                marginLeft: '4px',
+                                margin: 'auto',
+                                border: '0px',
+                                background: 'none',
+                            }}
+                        ></button>
+                    </form>
+                </div>
             </div>
         );
     }
@@ -346,7 +400,7 @@ export default class OQLTextArea extends React.Component<
                             ></i>
                         )}
                     </button>
-                    {this.chatWindow()}
+                    {!this.showComment && this.chatWindow()}
 
                     {this.props.submitButton}
                 </div>
