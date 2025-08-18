@@ -133,7 +133,7 @@ export type ClinicalAttributeCountFilter = {
         'sampleListId': string
 
 };
-export type OQLHelperMessage = {
+export type SupportMessage = {
         'message': string
 };
 export type ClinicalData = {
@@ -8241,17 +8241,23 @@ export default class CBioPortalAPIInternal {
                 return response.body;
             });
         };
+
     /**
-     * OQL hackathon stuff
+     * Send a support message to the AI support endpoint.
+     * @method
+     * @name CBioPortalAPIInternal#getSupportUsingPOST
+     * @param {Object} parameters - Parameters for the request.
+     * @param {SupportMessage} [parameters.supportMessage] - The message to send to the AI support system. This can contain user queries, questions, or other requests.
+     * @param {string} [parameters.$domain] - Optional override for the API domain. Defaults to the instance's domain if not provided.
      */
-    getOQLQueryUsingPOSTWithHttpInfo(parameters: {
-        'oqlHelperMessage' ? : OQLHelperMessage,
+    getSupportUsingPOSTWithHttpInfo(parameters: {
+        'supportMessage' ? : SupportMessage,
             $domain ? : string
     }): Promise < request.Response > {
         const domain = parameters.$domain ? parameters.$domain : this.domain;
         const errorHandlers = this.errorHandlers;
         const request = this.request;
-        let path = '/oqlhelper';
+        let path = '/support';
         let body: any;
         let queryParameters: any = {};
         let headers: any = {};
@@ -8260,8 +8266,8 @@ export default class CBioPortalAPIInternal {
             headers['Accept'] = 'application/json';
             headers['Content-Type'] = 'application/json';
 
-            if (parameters['oqlHelperMessage'] !== undefined) {
-                body = parameters['oqlHelperMessage'];
+            if (parameters['supportMessage'] !== undefined) {
+                body = parameters['supportMessage'];
             }
 
             request('POST', domain + path, body, headers, queryParameters, form, reject, resolve, errorHandlers);
@@ -8269,12 +8275,20 @@ export default class CBioPortalAPIInternal {
         });
     };
 
-    getOQLQueryUsingPOST(parameters: {
-        'oqlHelperMessage' ? : OQLHelperMessage,
+    /**
+     * Send a support message to the AI support endpoint and return only the response body.
+     * @method
+     * @name CBioPortalAPIInternal#getSupprtUsingPOST
+     * @param {Object} parameters - Parameters for the request.
+     * @param {SupportMessage} [parameters.supportMessage] - The message to send to the AI support system.
+     * @param {string} [parameters.$domain] - Optional override for the API domain.
+     */
+    getSupprtUsingPOST(parameters: {
+        'supportMessage' ? : SupportMessage,
                 $domain ? : string
         }): Promise<{ query: string }>
         {
-            return this.getOQLQueryUsingPOSTWithHttpInfo(parameters).then(function(response: request.Response) {
+            return this.getSupportUsingPOSTWithHttpInfo(parameters).then(function(response: request.Response) {
                 return response.body;
             });
         };

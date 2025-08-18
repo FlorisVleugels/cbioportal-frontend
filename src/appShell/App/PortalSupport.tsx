@@ -135,7 +135,6 @@ export default class PortalSupport extends React.Component<{
                                         fontSize: '20px',
                                         color: '#3498db',
                                         marginRight: '8px',
-                                        margin: 'auto',
                                         border: 0,
                                         background: 'none',
                                     }}
