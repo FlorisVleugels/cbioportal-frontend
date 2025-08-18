@@ -13,6 +13,8 @@ export default class PortalSupport extends React.Component<{
     appStore: AppStore;
 }> {
     @observable private userInput = '';
+    @observable private pending = false;
+    @observable private showErrorMessage = false;
 
     constructor(props: { appStore: AppStore }) {
         super(props);
@@ -43,18 +45,28 @@ export default class PortalSupport extends React.Component<{
         this.userInput = '';
     }
 
+    @action.bound
     private async getResponse() {
+        this.showErrorMessage = false;
+        this.pending = true;
+
         let supportMessage = {
             message: this.userInput,
         } as SupportMessage;
-        let response = await internalClient.getSupportUsingPOST({
-            supportMessage,
-        });
 
-        this.props.appStore.messages.push({
-            speaker: 'AI',
-            text: response.answer,
-        });
+        try {
+            const response = await internalClient.getSupportUsingPOST({
+                supportMessage,
+            });
+            this.props.appStore.messages.push({
+                speaker: 'AI',
+                text: response.answer,
+            });
+            this.pending = false;
+        } catch (error) {
+            this.pending = false;
+            this.showErrorMessage = true;
+        }
     }
 
     renderButton() {
@@ -74,6 +86,26 @@ export default class PortalSupport extends React.Component<{
                     />
                 )}
             </button>
+        );
+    }
+
+    renderThinking() {
+        return (
+            <div className={styles.thinking}>
+                <span className={styles.dots}>
+                    <span className={styles.dot} />
+                    <span className={styles.dot} />
+                    <span className={styles.dot} />
+                </span>
+            </div>
+        );
+    }
+
+    renderErrorMessage() {
+        return (
+            <div className={styles.error}>
+                Something went wrong, please try again.
+            </div>
         );
     }
 
@@ -129,6 +161,8 @@ export default class PortalSupport extends React.Component<{
                                 query using Onco Query Language (OQL).
                             </div>
                             {this.renderMessages()}
+                            {this.pending && this.renderThinking()}
+                            {this.showErrorMessage && this.renderErrorMessage()}
                         </div>
 
                         <div className={styles.inputarea}>

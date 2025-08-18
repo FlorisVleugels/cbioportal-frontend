@@ -1,5 +1,9 @@
 declare const styles: {
+  readonly "bubble-bounce": string;
   readonly "chatWindow": string;
+  readonly "dot": string;
+  readonly "dots": string;
+  readonly "error": string;
   readonly "form": string;
   readonly "input": string;
   readonly "inputarea": string;
@@ -11,6 +15,7 @@ declare const styles: {
   readonly "supportContainer": string;
   readonly "textarea": string;
   readonly "textheader": string;
+  readonly "thinking": string;
   readonly "titleIcon": string;
   readonly "titlearea": string;
 };
