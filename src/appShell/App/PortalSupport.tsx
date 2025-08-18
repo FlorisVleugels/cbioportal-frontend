@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ReactMarkdown from 'react-markdown';
 import './footer.scss';
 import _ from 'lodash';
 import { AppStore } from '../../AppStore';
@@ -129,7 +130,9 @@ export default class PortalSupport extends React.Component<{
                             >
                                 {msg.text.split('\n').map((line, i) => (
                                     <p key={i} className={styles.messageLine}>
-                                        {line}
+                                        <ReactMarkdown key={i}>
+                                            {line}
+                                        </ReactMarkdown>
                                     </p>
                                 ))}
                             </div>
