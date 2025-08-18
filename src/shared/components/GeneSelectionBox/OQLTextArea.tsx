@@ -258,8 +258,6 @@ export default class OQLTextArea extends React.Component<
             : 'Click gene symbols below or enter here';
     }
 
-    handleSubmit() {}
-
     @bind onChange(event: any) {
         this.currentTextAreaValue = event.currentTarget.value;
         this.geneQueryStr = this.currentTextAreaValue;
@@ -314,31 +312,22 @@ export default class OQLTextArea extends React.Component<
 
                     {this.props.submitButton}
                 </div>
-                {this.props.validateInputGeneQuery && (
-                    <div className={'oqlValidationContainer'}>
-                        <GeneSymbolValidator
-                            focus={this.props.focus}
-                            geneQuery={this.queryToBeValidated}
-                            skipGeneValidation={this.skipGenesValidation}
-                            updateGeneQuery={this.updateGeneQuery}
-                            afterValidation={this.afterGeneSymbolValidation}
-                            replaceGene={this.replaceGene}
-                            errorMessageOnly={
-                                this.props.location ===
-                                GeneBoxType.STUDY_VIEW_PAGE
-                            }
-                            highlightError={this.highlightError}
-                        >
-                            {this.props.children}
-                        </GeneSymbolValidator>
-                    </div>
-                )}
-                {!this.props.validateInputGeneQuery &&
-                    this.afterGeneSymbolValidation(
-                        true,
-                        { found: [], suggestions: [] },
-                        getOQL(this.geneQueryStr)
-                    )}
+                <div className={'oqlValidationContainer'}>
+                    <GeneSymbolValidator
+                        focus={this.props.focus}
+                        geneQuery={this.queryToBeValidated}
+                        skipGeneValidation={this.skipGenesValidation}
+                        updateGeneQuery={this.updateGeneQuery}
+                        afterValidation={this.afterGeneSymbolValidation}
+                        replaceGene={this.replaceGene}
+                        errorMessageOnly={
+                            this.props.location === GeneBoxType.STUDY_VIEW_PAGE
+                        }
+                        highlightError={this.highlightError}
+                    >
+                        {this.props.children}
+                    </GeneSymbolValidator>
+                </div>
                 <div>
                     {this.showErrorsAndMessages && this.props.error && (
                         <span
