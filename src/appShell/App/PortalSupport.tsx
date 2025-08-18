@@ -5,6 +5,8 @@ import { AppStore } from '../../AppStore';
 import { observer } from 'mobx-react';
 import { action, observable, makeObservable } from 'mobx';
 import styles from './support.module.scss';
+import internalClient from '../../shared/api/cbioportalInternalClientInstance';
+import { SupportMessage } from 'cbioportal-ts-api-client/dist/generated/CBioPortalAPIInternal';
 
 @observer
 export default class PortalSupport extends React.Component<{
@@ -37,8 +39,22 @@ export default class PortalSupport extends React.Component<{
             speaker: 'User',
             text: this.userInput,
         });
-
+        this.getResponse();
         this.userInput = '';
+    }
+
+    private async getResponse() {
+        let supportMessage = {
+            message: this.userInput,
+        } as SupportMessage;
+        let response = await internalClient.getSupportUsingPOST({
+            supportMessage,
+        });
+
+        this.props.appStore.messages.push({
+            speaker: 'AI',
+            text: response.answer,
+        });
     }
 
     renderButton() {

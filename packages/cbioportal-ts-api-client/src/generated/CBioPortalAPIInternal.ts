@@ -8283,10 +8283,10 @@ export default class CBioPortalAPIInternal {
      * @param {SupportMessage} [parameters.supportMessage] - The message to send to the AI support system.
      * @param {string} [parameters.$domain] - Optional override for the API domain.
      */
-    getSupprtUsingPOST(parameters: {
+    getSupportUsingPOST(parameters: {
         'supportMessage' ? : SupportMessage,
                 $domain ? : string
-        }): Promise<{ query: string }>
+        }): Promise<{ answer: string }>
         {
             return this.getSupportUsingPOSTWithHttpInfo(parameters).then(function(response: request.Response) {
                 return response.body;
