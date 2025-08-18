@@ -97,7 +97,6 @@ export default class OQLTextArea extends React.Component<
     @observable private queryToBeValidated = '';
     @observable private isFocused = false;
     @observable private skipGenesValidation = false;
-    @observable private showComment = true;
     private queryStore: QueryStore | undefined;
 
     private readonly textAreaRef: React.RefObject<HTMLTextAreaElement>;
@@ -178,11 +177,6 @@ export default class OQLTextArea extends React.Component<
 
         // The uncontrolled component value should be updated at the moment the gene query is updated
         this.updateTextAreaRefValue();
-    }
-
-    @action.bound
-    private changeIcon() {
-        this.showComment = !this.showComment;
     }
 
     private getTextAreaValue() {
@@ -299,70 +293,6 @@ export default class OQLTextArea extends React.Component<
         );
     }
 
-    renderMessages() {
-        enum Speaker {
-            AI,
-            User,
-        }
-        let messages: Map<Speaker, String> = new Map();
-
-        messages.set(
-            Speaker.AI,
-            "Hi there! \n My name is Tobi, I'm cBioPortal's Support Robot 🤖"
-        );
-        messages.set(Speaker.AI, 'What can I do for you today?');
-        messages.set(Speaker.User, 'I have a question foo bar foo bar');
-
-        messages.forEach((value: String, key: Speaker) => {});
-
-        return (
-            <div>
-                <div className={styles.message}>hello</div>
-                <div className={styles.question}>question</div>
-            </div>
-        );
-    }
-
-    chatWindow() {
-        return (
-            <div className={styles.chatWindow}>
-                <section className={styles.titlearea}>
-                    cBioPortal Support
-                </section>
-
-                <div className={styles.textarea}>
-                    <div className={styles.textheader}>
-                        Please ask your cBioPortal related questions here for
-                        example OQL, which the ai will format for you
-                    </div>
-                    {this.renderMessages()}
-                </div>
-
-                <div className={styles.inputarea}>
-                    <form className={styles.form}>
-                        <input
-                            className={styles.input}
-                            type="text"
-                            value="Type a message"
-                        />
-                        <button
-                            className="fa fa-paper-plane"
-                            aria-hidden="true"
-                            style={{
-                                fontSize: '20px',
-                                color: '#3498db',
-                                marginLeft: '4px',
-                                margin: 'auto',
-                                border: '0px',
-                                background: 'none',
-                            }}
-                        ></button>
-                    </form>
-                </div>
-            </div>
-        );
-    }
-
     render() {
         return (
             <div className={styles.genesSelection}>
@@ -381,26 +311,6 @@ export default class OQLTextArea extends React.Component<
                         data-test="geneSet"
                         style={{ height: this.props.textAreaHeight }}
                     />
-
-                    <button
-                        style={{ width: '48px', height: '48px' }}
-                        className="btn btn-primary btn-lg"
-                        data-test="aiButton"
-                        onClick={this.changeIcon}
-                    >
-                        {this.showComment ? (
-                            <i
-                                className="fa fa-comment"
-                                style={{ fontSize: '24px', marginLeft: '-4px' }}
-                            ></i>
-                        ) : (
-                            <i
-                                className="fa fa-angle-down"
-                                style={{ fontSize: '24px' }}
-                            ></i>
-                        )}
-                    </button>
-                    {!this.showComment && this.chatWindow()}
 
                     {this.props.submitButton}
                 </div>
